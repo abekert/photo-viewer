@@ -14,21 +14,15 @@
 		9D21DA8C18440878000C555F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D21DA8B18440878000C555F /* AppDelegate.m */; };
 		9D21DA8F18440878000C555F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D21DA8D18440878000C555F /* MainMenu.xib */; };
 		9D21DA9118440878000C555F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D21DA9018440878000C555F /* Images.xcassets */; };
-		9D21DA9818440878000C555F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21DA9718440878000C555F /* XCTest.framework */; };
-		9D21DA9918440878000C555F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21DA7818440878000C555F /* Cocoa.framework */; };
-		9D21DAA118440878000C555F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9D21DA9F18440878000C555F /* InfoPlist.strings */; };
-		9D21DAA318440878000C555F /* PhotoViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D21DAA218440878000C555F /* PhotoViewerTests.m */; };
+		9D21DAAD18440AB0000C555F /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21DAAC18440AB0000C555F /* SceneKit.framework */; };
+		9D21DAAF18440ACE000C555F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21DAAE18440ACE000C555F /* QuartzCore.framework */; };
+		9DFF84DC18441ACB009A1F19 /* frame_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DFF84D918441ACB009A1F19 /* frame_texture.jpg */; };
+		9DFF84DD18441ACB009A1F19 /* Frame.dae in Resources */ = {isa = PBXBuildFile; fileRef = 9DFF84DA18441ACB009A1F19 /* Frame.dae */; };
+		9DFF84DE18441ACB009A1F19 /* gloss.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DFF84DB18441ACB009A1F19 /* gloss.png */; };
+		9DFF84E118441C3D009A1F19 /* SceneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF84E018441C3D009A1F19 /* SceneView.m */; };
+		9DFF84E418441CEE009A1F19 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF84E318441CEE009A1F19 /* Scene.m */; };
+		9DFF84E61844290C009A1F19 /* floor-frames.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DFF84E51844290C009A1F19 /* floor-frames.jpg */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		9D21DA9A18440878000C555F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D21DA6D18440878000C555F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9D21DA7418440878000C555F;
-			remoteInfo = PhotoViewer;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		9D21DA7518440878000C555F /* PhotoViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,11 +39,19 @@
 		9D21DA8B18440878000C555F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9D21DA8E18440878000C555F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		9D21DA9018440878000C555F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		9D21DA9618440878000C555F /* PhotoViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoViewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D21DA9718440878000C555F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		9D21DA9E18440878000C555F /* PhotoViewerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoViewerTests-Info.plist"; sourceTree = "<group>"; };
 		9D21DAA018440878000C555F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9D21DAA218440878000C555F /* PhotoViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoViewerTests.m; sourceTree = "<group>"; };
+		9D21DAAC18440AB0000C555F /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		9D21DAAE18440ACE000C555F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9DFF84D918441ACB009A1F19 /* frame_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = frame_texture.jpg; path = PhotoViewer/frame_texture.jpg; sourceTree = SOURCE_ROOT; };
+		9DFF84DA18441ACB009A1F19 /* Frame.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; name = Frame.dae; path = PhotoViewer/Frame.dae; sourceTree = SOURCE_ROOT; };
+		9DFF84DB18441ACB009A1F19 /* gloss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gloss.png; path = PhotoViewer/gloss.png; sourceTree = SOURCE_ROOT; };
+		9DFF84DF18441C3D009A1F19 /* SceneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneView.h; sourceTree = "<group>"; };
+		9DFF84E018441C3D009A1F19 /* SceneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneView.m; sourceTree = "<group>"; };
+		9DFF84E218441CEE009A1F19 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		9DFF84E318441CEE009A1F19 /* Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scene.m; sourceTree = "<group>"; };
+		9DFF84E51844290C009A1F19 /* floor-frames.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "floor-frames.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,16 +59,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D21DAAF18440ACE000C555F /* QuartzCore.framework in Frameworks */,
+				9D21DAAD18440AB0000C555F /* SceneKit.framework in Frameworks */,
 				9D21DA7918440878000C555F /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9D21DA9318440878000C555F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9D21DA9918440878000C555F /* Cocoa.framework in Frameworks */,
-				9D21DA9818440878000C555F /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +71,8 @@
 		9D21DA6C18440878000C555F = {
 			isa = PBXGroup;
 			children = (
+				9D21DAB218440AF5000C555F /* Resources */,
+				9DFF84E51844290C009A1F19 /* floor-frames.jpg */,
 				9D21DA7E18440878000C555F /* PhotoViewer */,
 				9D21DA9C18440878000C555F /* PhotoViewerTests */,
 				9D21DA7718440878000C555F /* Frameworks */,
@@ -87,7 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				9D21DA7518440878000C555F /* PhotoViewer.app */,
-				9D21DA9618440878000C555F /* PhotoViewerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,8 +91,9 @@
 		9D21DA7718440878000C555F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D21DAAE18440ACE000C555F /* QuartzCore.framework */,
+				9D21DAAC18440AB0000C555F /* SceneKit.framework */,
 				9D21DA7818440878000C555F /* Cocoa.framework */,
-				9D21DA9718440878000C555F /* XCTest.framework */,
 				9D21DA7A18440878000C555F /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -117,6 +114,10 @@
 			children = (
 				9D21DA8A18440878000C555F /* AppDelegate.h */,
 				9D21DA8B18440878000C555F /* AppDelegate.m */,
+				9DFF84DF18441C3D009A1F19 /* SceneView.h */,
+				9DFF84E018441C3D009A1F19 /* SceneView.m */,
+				9DFF84E218441CEE009A1F19 /* Scene.h */,
+				9DFF84E318441CEE009A1F19 /* Scene.m */,
 				9D21DA8D18440878000C555F /* MainMenu.xib */,
 				9D21DA9018440878000C555F /* Images.xcassets */,
 				9D21DA7F18440878000C555F /* Supporting Files */,
@@ -154,6 +155,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9D21DAB218440AF5000C555F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9DA4A963184416C50062F709 /* Frame */,
+			);
+			name = Resources;
+			path = PhotoViewer;
+			sourceTree = "<group>";
+		};
+		9DA4A963184416C50062F709 /* Frame */ = {
+			isa = PBXGroup;
+			children = (
+				9DFF84D918441ACB009A1F19 /* frame_texture.jpg */,
+				9DFF84DA18441ACB009A1F19 /* Frame.dae */,
+				9DFF84DB18441ACB009A1F19 /* gloss.png */,
+			);
+			name = Frame;
+			path = Untitled;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,24 +195,6 @@
 			productReference = 9D21DA7518440878000C555F /* PhotoViewer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9D21DA9518440878000C555F /* PhotoViewerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9D21DAA918440878000C555F /* Build configuration list for PBXNativeTarget "PhotoViewerTests" */;
-			buildPhases = (
-				9D21DA9218440878000C555F /* Sources */,
-				9D21DA9318440878000C555F /* Frameworks */,
-				9D21DA9418440878000C555F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9D21DA9B18440878000C555F /* PBXTargetDependency */,
-			);
-			name = PhotoViewerTests;
-			productName = PhotoViewerTests;
-			productReference = 9D21DA9618440878000C555F /* PhotoViewerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -200,11 +203,6 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Alexander Bekert";
-				TargetAttributes = {
-					9D21DA9518440878000C555F = {
-						TestTargetID = 9D21DA7418440878000C555F;
-					};
-				};
 			};
 			buildConfigurationList = 9D21DA7018440878000C555F /* Build configuration list for PBXProject "PhotoViewer" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -220,7 +218,6 @@
 			projectRoot = "";
 			targets = (
 				9D21DA7418440878000C555F /* PhotoViewer */,
-				9D21DA9518440878000C555F /* PhotoViewerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -232,16 +229,12 @@
 			files = (
 				9D21DA8318440878000C555F /* InfoPlist.strings in Resources */,
 				9D21DA9118440878000C555F /* Images.xcassets in Resources */,
+				9DFF84DE18441ACB009A1F19 /* gloss.png in Resources */,
 				9D21DA8918440878000C555F /* Credits.rtf in Resources */,
+				9DFF84E61844290C009A1F19 /* floor-frames.jpg in Resources */,
+				9DFF84DD18441ACB009A1F19 /* Frame.dae in Resources */,
+				9DFF84DC18441ACB009A1F19 /* frame_texture.jpg in Resources */,
 				9D21DA8F18440878000C555F /* MainMenu.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9D21DA9418440878000C555F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9D21DAA118440878000C555F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,28 +245,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DFF84E418441CEE009A1F19 /* Scene.m in Sources */,
 				9D21DA8C18440878000C555F /* AppDelegate.m in Sources */,
 				9D21DA8518440878000C555F /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9D21DA9218440878000C555F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9D21DAA318440878000C555F /* PhotoViewerTests.m in Sources */,
+				9DFF84E118441C3D009A1F19 /* SceneView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		9D21DA9B18440878000C555F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9D21DA7418440878000C555F /* PhotoViewer */;
-			targetProxy = 9D21DA9A18440878000C555F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9D21DA8118440878000C555F /* InfoPlist.strings */ = {
@@ -405,46 +384,6 @@
 			};
 			name = Release;
 		};
-		9D21DAAA18440878000C555F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PhotoViewer.app/Contents/MacOS/PhotoViewer";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PhotoViewer/PhotoViewer-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "PhotoViewerTests/PhotoViewerTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		9D21DAAB18440878000C555F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PhotoViewer.app/Contents/MacOS/PhotoViewer";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "PhotoViewer/PhotoViewer-Prefix.pch";
-				INFOPLIST_FILE = "PhotoViewerTests/PhotoViewerTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -464,14 +403,7 @@
 				9D21DAA818440878000C555F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		9D21DAA918440878000C555F /* Build configuration list for PBXNativeTarget "PhotoViewerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9D21DAAA18440878000C555F /* Debug */,
-				9D21DAAB18440878000C555F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

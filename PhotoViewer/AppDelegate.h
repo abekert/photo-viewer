@@ -7,9 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "SceneView.h"
+#import "Scene.h"
+
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (weak) IBOutlet SceneView *view;
+@property (strong) Scene *scene;
+
 
 @end
