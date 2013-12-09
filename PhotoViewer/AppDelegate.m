@@ -27,8 +27,7 @@
     
     // Load a scene
     self.scene = [Scene scene];
-    [self.scene addContent];
-
+    
     self.view.scene = self.scene;
 }
 

@@ -16,6 +16,8 @@
 		9D21DA9118440878000C555F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D21DA9018440878000C555F /* Images.xcassets */; };
 		9D21DAAD18440AB0000C555F /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21DAAC18440AB0000C555F /* SceneKit.framework */; };
 		9D21DAAF18440ACE000C555F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21DAAE18440ACE000C555F /* QuartzCore.framework */; };
+		9DA1410E1844A24E0074CA35 /* Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1410D1844A24E0074CA35 /* Frame.m */; };
+		9DA141111844A3080074CA35 /* SCNNode+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA141101844A3080074CA35 /* SCNNode+Utils.m */; };
 		9DFF84DC18441ACB009A1F19 /* frame_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DFF84D918441ACB009A1F19 /* frame_texture.jpg */; };
 		9DFF84DD18441ACB009A1F19 /* Frame.dae in Resources */ = {isa = PBXBuildFile; fileRef = 9DFF84DA18441ACB009A1F19 /* Frame.dae */; };
 		9DFF84DE18441ACB009A1F19 /* gloss.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DFF84DB18441ACB009A1F19 /* gloss.png */; };
@@ -44,6 +46,10 @@
 		9D21DAA218440878000C555F /* PhotoViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoViewerTests.m; sourceTree = "<group>"; };
 		9D21DAAC18440AB0000C555F /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		9D21DAAE18440ACE000C555F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9DA1410C1844A24E0074CA35 /* Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frame.h; sourceTree = "<group>"; };
+		9DA1410D1844A24E0074CA35 /* Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Frame.m; sourceTree = "<group>"; };
+		9DA1410F1844A3080074CA35 /* SCNNode+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCNNode+Utils.h"; sourceTree = "<group>"; };
+		9DA141101844A3080074CA35 /* SCNNode+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCNNode+Utils.m"; sourceTree = "<group>"; };
 		9DFF84D918441ACB009A1F19 /* frame_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = frame_texture.jpg; path = PhotoViewer/frame_texture.jpg; sourceTree = SOURCE_ROOT; };
 		9DFF84DA18441ACB009A1F19 /* Frame.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; name = Frame.dae; path = PhotoViewer/Frame.dae; sourceTree = SOURCE_ROOT; };
 		9DFF84DB18441ACB009A1F19 /* gloss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gloss.png; path = PhotoViewer/gloss.png; sourceTree = SOURCE_ROOT; };
@@ -121,6 +127,10 @@
 				9D21DA8D18440878000C555F /* MainMenu.xib */,
 				9D21DA9018440878000C555F /* Images.xcassets */,
 				9D21DA7F18440878000C555F /* Supporting Files */,
+				9DA1410C1844A24E0074CA35 /* Frame.h */,
+				9DA1410D1844A24E0074CA35 /* Frame.m */,
+				9DA1410F1844A3080074CA35 /* SCNNode+Utils.h */,
+				9DA141101844A3080074CA35 /* SCNNode+Utils.m */,
 			);
 			path = PhotoViewer;
 			sourceTree = "<group>";
@@ -245,9 +255,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DA141111844A3080074CA35 /* SCNNode+Utils.m in Sources */,
 				9DFF84E418441CEE009A1F19 /* Scene.m in Sources */,
 				9D21DA8C18440878000C555F /* AppDelegate.m in Sources */,
 				9D21DA8518440878000C555F /* main.m in Sources */,
+				9DA1410E1844A24E0074CA35 /* Frame.m in Sources */,
 				9DFF84E118441C3D009A1F19 /* SceneView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

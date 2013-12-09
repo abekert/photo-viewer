@@ -7,9 +7,14 @@
 //
 
 #import <SceneKit/SceneKit.h>
+#import "Frame.h"
 
 @interface Scene : SCNScene
+{
+    NSInteger xPosition;
+}
+@property (strong) Frame *frame;
 
-- (void)addContent;
+- (void)loadPicturesAtURLs:(NSArray *)urls;
 
 @end

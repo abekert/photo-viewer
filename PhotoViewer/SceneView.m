@@ -7,8 +7,32 @@
 //
 
 #import "SceneView.h"
+#import "Scene.h"
 
 @implementation SceneView
+
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        [self setCamera];
+    }
+    
+    return self;
+}
+
+- (void)setCamera
+{
+    SCNNode *cameraNode = [SCNNode node];
+	cameraNode.camera = [SCNCamera camera];
+	cameraNode.position = SCNVector3Make(0, 5, 100);
+    cameraNode.rotation = SCNVector4Make(0, 0, 0, 0);
+    cameraNode.camera.zFar = 1000000;
+    
+    self.scene.rootNode.camera = cameraNode.camera;
+    self.pointOfView = cameraNode;
+}
 
 - (void)loadSceneAtURL:(NSURL *)url {
     // Clear any current selection.
@@ -61,10 +85,15 @@
  */
 
 - (NSDragOperation)dragOperationForPasteboard:(NSPasteboard *)pasteboard {
-    // Only support drags from .dae files.
     if ([[pasteboard types] containsObject:NSURLPboardType]) {
         NSURL *fileURL = [NSURL URLFromPasteboard:pasteboard];
-        if ([[fileURL pathExtension] isEqualToString:@"dae"]) {
+        
+        NSString *pathExtension = [fileURL pathExtension];
+        
+        if (([pathExtension isEqualToString:@"jpg"]) ||
+            ([pathExtension isEqualToString:@"jpeg"]) ||
+            ([pathExtension isEqualToString:@"png"]))
+        {
             return NSDragOperationCopy;
         }
     }
@@ -81,11 +110,25 @@
 }
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
+
     NSPasteboard *pasteboard = [sender draggingPasteboard];
     
     if ([[pasteboard types] containsObject:NSURLPboardType]) {
-        NSURL *fileURL = [NSURL URLFromPasteboard:pasteboard];
-        [self loadSceneAtURL:fileURL];
+        
+        NSArray *urls = [pasteboard readObjectsForClasses:@[[NSURL class]] options:nil];
+        for (NSURL *url in urls) {
+            NSLog(@"%@\n", url.path);
+        }
+        
+        
+//        NSURL *fileURL = [NSURL URLFromPasteboard:pasteboard];
+//        NSLog(@"%@", fileURL.description);
+        
+        Scene *scene = (Scene *)self.scene;
+//        [scene.frame placeImageWithImageURL:fileURL];
+        [scene loadPicturesAtURLs:urls];
+        
+//        [self loadSceneAtURL:fileURL];
         return YES;
     }
     
