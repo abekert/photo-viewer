@@ -30,6 +30,8 @@
     [self addText:@"Drag your photos here"];
 }
 
+#pragma mark Camera
+
 - (void)addCamera
 {
     SCNNode *cameraNode = [SCNNode node];
@@ -48,6 +50,51 @@
     
     [self.rootNode addChildNode:cameraNode];
 }
+
+- (void)adjustCamera
+{
+    SCNNode *cameraNode = [self.rootNode childNodeWithName:@"camera" recursively:YES];
+
+    [SCNTransaction begin];
+    [SCNTransaction setAnimationDuration:0.5];
+    [SCNTransaction setCompletionBlock:^{
+        
+        [SCNTransaction begin];
+        [SCNTransaction setAnimationDuration:0.3];
+
+        cameraNode.camera.focalDistance = 130;
+        cameraNode.camera.focalBlurRadius = 10;
+        cameraNode.camera.focalSize = 60;
+        cameraNode.camera.aperture = 0.5;
+
+        [SCNTransaction commit];
+
+    }];
+    
+    cameraNode.camera.focalDistance = 2;
+    cameraNode.camera.focalBlurRadius = 16;
+    cameraNode.camera.focalSize = 80;
+    cameraNode.camera.aperture = 1;
+    
+    [SCNTransaction commit];
+}
+
+- (void)resetCamera
+{
+    SCNNode *cameraNode = [self.rootNode childNodeWithName:@"camera" recursively:YES];
+    
+    [SCNTransaction begin];
+    [SCNTransaction setAnimationDuration:2];
+    
+    cameraNode.camera.focalDistance = 0;
+    cameraNode.camera.focalBlurRadius = 0;
+    cameraNode.camera.focalSize = 0;
+    cameraNode.camera.aperture = 0;
+    
+    [SCNTransaction commit];
+}
+
+#pragma mark Floor
 
 - (void)addFloor
 {
@@ -68,6 +115,8 @@
     [self.rootNode addChildNode:floorNode];
 }
 
+#pragma mark Light
+
 - (void)addLight
 {
     [self addSpotLight];
@@ -77,16 +126,9 @@
 {
     SCNNode *lightNode = [SCNNode node];
     
-//    lightNode.geometry = [SCNSphere sphereWithRadius:3];
-//    SCNMaterial *material = [SCNMaterial material];
-//    material.diffuse.contents = [NSColor yellowColor];
-//    material.emission.contents = [NSColor yellowColor];
-//    lightNode.geometry.materials = @[material];
-    
     lightNode.light = [SCNLight light];
     lightNode.light.type = SCNLightTypeSpot;
     lightNode.position = SCNVector3Make(60, 25, 20);
-//    lightNode.rotation = SCNVector4Make(1, -4, -4, -M_PI_2);
     [lightNode.light setAttribute:@1 forKey:SCNLightSpotInnerAngleKey];
     [lightNode.light setAttribute:@300 forKey:SCNLightSpotOuterAngleKey];
     [lightNode.light setAttribute:@1000 forKey:SCNLightShadowFarClippingKey];
@@ -95,6 +137,20 @@
     [self.rootNode addChildNode:lightNode];
 }
 
+- (void)focusSpotlightAt:(Frame *)frame
+{
+    SCNNode *spotLight = [self.rootNode childNodeWithName:@"spotlight" recursively:YES];
+    
+    [SCNTransaction begin];
+    [SCNTransaction setAnimationDuration:2];
+    
+    spotLight.position = frame.spotlightPosition;
+    spotLight.constraints = @[[SCNLookAtConstraint lookAtConstraintWithTarget:frame]];
+    
+    [SCNTransaction commit];
+}
+
+#pragma mark Text
 
 - (void)addText:(NSString *)textString
 {
@@ -119,7 +175,6 @@
     
     textNode.position = SCNVector3Make(0, 0, 0);
     textNode.opacity = 1;
-//    [self focusSpotlightAt:textNode];
 
     [SCNTransaction commit];
 }
@@ -141,6 +196,8 @@
     
     [SCNTransaction commit];
 }
+
+#pragma mark Pictures
 
 - (void)loadPicturesAtURLs:(NSArray *)urls
 {
@@ -166,6 +223,7 @@
     }
     [self focusSpotlightAt:_pictures[0]];
     [self hideTextWithCompletion:block];
+    [self adjustCamera];
 }
 
 - (Frame *)addFrameWithImage:(NSImage *)image
@@ -208,20 +266,6 @@
     
     [_pictures removeAllObjects];
     _pictures = nil;
-}
-
-- (void)focusSpotlightAt:(Frame *)frame
-{
-    SCNNode *spotLight = [self.rootNode childNodeWithName:@"spotlight" recursively:YES];
-    
-    [SCNTransaction begin];
-    [SCNTransaction setAnimationDuration:2];
-    
-    spotLight.position = frame.spotlightPosition;
-    spotLight.constraints = @[[SCNLookAtConstraint lookAtConstraintWithTarget:frame]];
-
-    [SCNTransaction commit];
-
 }
 
 @end

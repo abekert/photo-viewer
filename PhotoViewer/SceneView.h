@@ -14,6 +14,4 @@
 }
 @property SCNMaterial *selectedMaterial;
 
-- (void)loadSceneAtURL:(NSURL *)url;
-
 @end

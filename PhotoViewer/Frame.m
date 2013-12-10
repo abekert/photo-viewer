@@ -18,38 +18,16 @@
     if (self) {
         image = newImage;
         
-//        [self returnIfNeeded];
-//        [self initTestImage];
-        [self addCamera];
         [self addFrame];
-//        [self setFrameApects];
         [self setFrameImage];
     }
     
     return self;
 }
 
-- (void)initTestImage
-{
-    NSString *path = [[NSBundle bundleWithPath:@"~/Pictures"] pathForResource:@"Fallout-3-01" ofType:@"jpeg"];
-    image = [[NSImage alloc] initWithContentsOfFile:path];
-}
-
 - (void)addFrame
 {
     frame = [self addChildNodeNamed:@"frame-layer" fromSceneNamed:@"frames"];
-}
-
-- (void)addCamera
-{
-//    SCNNode *cameraNode = [SCNNode node];
-//	cameraNode.camera = [SCNCamera camera];
-//	cameraNode.position = SCNVector3Make(-100, 5, 0);
-//    cameraNode.rotation = SCNVector4Make(0, 0, 0, 0);
-//    cameraNode.camera.zFar = 1000000;
-
-    self.camera = [SCNCamera camera];
-    self.camera.zFar = 100000;
 }
 
 - (Orientation)orientation
@@ -100,6 +78,8 @@
     [self placeImage:image];
 }
 
+#pragma mark Positions
+
 - (SCNVector3)cameraPosition
 {
     return SCNVector3Make(self.position.x + 20, self.position.y, self.position.z + 100);
@@ -109,6 +89,8 @@
 {
     return SCNVector3Make(self.position.x, self.position.y + 50, self.position.z + 10);
 }
+
+#pragma mark Rotate
 
 - (NSImage *)rotateIndividualImage: (NSImage *)sourceImage clockwise: (BOOL)clockwise
 {

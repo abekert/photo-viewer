@@ -12,53 +12,6 @@
 
 @implementation SceneView
 
-- (id)init
-{
-    self = [super init];
-    if (self)
-    {
-        [self setCamera];
-    }
-    
-    return self;
-}
-
-- (void)setCamera
-{
-    SCNNode *cameraNode = [SCNNode node];
-	cameraNode.camera = [SCNCamera camera];
-	cameraNode.position = SCNVector3Make(0, 200, 10);
-    cameraNode.rotation = SCNVector4Make(0, 0, 0, 0);
-    cameraNode.camera.zFar = 1000000;
-    [self.scene.rootNode addChildNode:cameraNode];
-    
-    self.scene.rootNode.camera = cameraNode.camera;
-    self.pointOfView = cameraNode;
-}
-
-- (void)loadSceneAtURL:(NSURL *)url {
-    // Clear any current selection.
-    self.selectedMaterial = nil;
-    
-    // Load the specified scene. First create a dictionary containing the options we want.
-    NSDictionary *options = @{
-                              // Create normals if absent.
-                              SCNSceneSourceCreateNormalsIfAbsentKey : @YES,
-                              // Optimize the rendering by flattening the scene graph when possible. Note that this would prevent you from animating objects independantly.
-                              SCNSceneSourceFlattenSceneKey : @YES
-                              };
-    
-    // Load and set the scene.
-    NSError * __autoreleasing error;
-    SCNScene *scene = [SCNScene sceneWithURL:url options:options error:&error];
-    if (scene) {
-        self.scene = scene;
-    }
-    else {
-        NSLog(@"Problem loading scene from %@\n%@", url, [error localizedDescription]);
-    }
-}
-
 #pragma mark - Init
 
 - (void)commonInit {
@@ -72,7 +25,8 @@
     // Setup camera
     SCNNode *cameraNode = [scene.rootNode childNodeWithName:@"camera" recursively:YES];
     self.pointOfView = cameraNode;
-
+    
+    self.showsStatistics = YES;
 }
 
 - (id)initWithFrame:(NSRect)frameRect {
@@ -144,6 +98,8 @@
     
     return NO;
 }
+
+#pragma mark Transitions
 
 - (void)accentCameraAtPhotoWithIndex:(NSInteger)index
 {

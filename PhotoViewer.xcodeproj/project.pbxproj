@@ -17,11 +17,11 @@
 		9D21DAAD18440AB0000C555F /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21DAAC18440AB0000C555F /* SceneKit.framework */; };
 		9D21DAAF18440ACE000C555F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21DAAE18440ACE000C555F /* QuartzCore.framework */; };
 		9DA1410E1844A24E0074CA35 /* Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1410D1844A24E0074CA35 /* Frame.m */; };
-		9DA141111844A3080074CA35 /* SCNNode+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA141101844A3080074CA35 /* SCNNode+Utils.m */; };
 		9DDF0C7C18565D8D0072ED91 /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF0C7818565D8D0072ED91 /* frame.png */; };
 		9DDF0C7D18565D8D0072ED91 /* frames.dae in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF0C7918565D8D0072ED91 /* frames.dae */; };
 		9DDF0C7E18565D8D0072ED91 /* leather-bump.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF0C7A18565D8D0072ED91 /* leather-bump.jpg */; };
 		9DDF0C7F18565D8D0072ED91 /* leather.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF0C7B18565D8D0072ED91 /* leather.jpg */; };
+		9DDF0C821856A5550072ED91 /* SCNNode+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF0C811856A5550072ED91 /* SCNNode+Utils.m */; };
 		9DFF84DE18441ACB009A1F19 /* gloss.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DFF84DB18441ACB009A1F19 /* gloss.png */; };
 		9DFF84E118441C3D009A1F19 /* SceneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF84E018441C3D009A1F19 /* SceneView.m */; };
 		9DFF84E418441CEE009A1F19 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF84E318441CEE009A1F19 /* Scene.m */; };
@@ -50,12 +50,12 @@
 		9D21DAAE18440ACE000C555F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9DA1410C1844A24E0074CA35 /* Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frame.h; sourceTree = "<group>"; };
 		9DA1410D1844A24E0074CA35 /* Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Frame.m; sourceTree = "<group>"; };
-		9DA1410F1844A3080074CA35 /* SCNNode+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCNNode+Utils.h"; sourceTree = "<group>"; };
-		9DA141101844A3080074CA35 /* SCNNode+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCNNode+Utils.m"; sourceTree = "<group>"; };
 		9DDF0C7818565D8D0072ED91 /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frame.png; path = "../../../../../../Volumes/Media/Users/win2l/Downloads/SceneKit_Slides_WWDC2013/Scene Kit Session WWDC 2013/Resources/Scenes/frames/frame.png"; sourceTree = "<group>"; };
 		9DDF0C7918565D8D0072ED91 /* frames.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; name = frames.dae; path = "../../../../../../Volumes/Media/Users/win2l/Downloads/SceneKit_Slides_WWDC2013/Scene Kit Session WWDC 2013/Resources/Scenes/frames/frames.dae"; sourceTree = "<group>"; };
 		9DDF0C7A18565D8D0072ED91 /* leather-bump.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "leather-bump.jpg"; path = "../../../../../../Volumes/Media/Users/win2l/Downloads/SceneKit_Slides_WWDC2013/Scene Kit Session WWDC 2013/Resources/Scenes/frames/leather-bump.jpg"; sourceTree = "<group>"; };
 		9DDF0C7B18565D8D0072ED91 /* leather.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = leather.jpg; path = "../../../../../../Volumes/Media/Users/win2l/Downloads/SceneKit_Slides_WWDC2013/Scene Kit Session WWDC 2013/Resources/Scenes/frames/leather.jpg"; sourceTree = "<group>"; };
+		9DDF0C801856A5550072ED91 /* SCNNode+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCNNode+Utils.h"; sourceTree = "<group>"; };
+		9DDF0C811856A5550072ED91 /* SCNNode+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCNNode+Utils.m"; sourceTree = "<group>"; };
 		9DFF84DB18441ACB009A1F19 /* gloss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gloss.png; path = PhotoViewer/gloss.png; sourceTree = SOURCE_ROOT; };
 		9DFF84DF18441C3D009A1F19 /* SceneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneView.h; sourceTree = "<group>"; };
 		9DFF84E018441C3D009A1F19 /* SceneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneView.m; sourceTree = "<group>"; };
@@ -128,13 +128,13 @@
 				9DFF84E018441C3D009A1F19 /* SceneView.m */,
 				9DFF84E218441CEE009A1F19 /* Scene.h */,
 				9DFF84E318441CEE009A1F19 /* Scene.m */,
+				9DA1410C1844A24E0074CA35 /* Frame.h */,
+				9DA1410D1844A24E0074CA35 /* Frame.m */,
+				9DDF0C801856A5550072ED91 /* SCNNode+Utils.h */,
+				9DDF0C811856A5550072ED91 /* SCNNode+Utils.m */,
 				9D21DA8D18440878000C555F /* MainMenu.xib */,
 				9D21DA9018440878000C555F /* Images.xcassets */,
 				9D21DA7F18440878000C555F /* Supporting Files */,
-				9DA1410C1844A24E0074CA35 /* Frame.h */,
-				9DA1410D1844A24E0074CA35 /* Frame.m */,
-				9DA1410F1844A3080074CA35 /* SCNNode+Utils.h */,
-				9DA141101844A3080074CA35 /* SCNNode+Utils.m */,
 			);
 			path = PhotoViewer;
 			sourceTree = "<group>";
@@ -263,7 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DA141111844A3080074CA35 /* SCNNode+Utils.m in Sources */,
+				9DDF0C821856A5550072ED91 /* SCNNode+Utils.m in Sources */,
 				9DFF84E418441CEE009A1F19 /* Scene.m in Sources */,
 				9D21DA8C18440878000C555F /* AppDelegate.m in Sources */,
 				9D21DA8518440878000C555F /* main.m in Sources */,
