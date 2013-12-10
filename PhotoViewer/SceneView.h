@@ -9,7 +9,9 @@
 #import <SceneKit/SceneKit.h>
 
 @interface SceneView : SCNView
-
+{
+    NSInteger currentPhotoIndex;
+}
 @property SCNMaterial *selectedMaterial;
 
 - (void)loadSceneAtURL:(NSURL *)url;

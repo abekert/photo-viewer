@@ -14,7 +14,10 @@
     NSInteger xPosition;
 }
 @property (strong) Frame *frame;
+@property (nonatomic, readonly) NSMutableArray *pictures;
 
 - (void)loadPicturesAtURLs:(NSArray *)urls;
+- (void)loadPicturesAtURLs:(NSArray *)urls withCompletion:(void (^)(void))block;
+- (void)focusSpotlightAt:(SCNNode *)node;
 
 @end

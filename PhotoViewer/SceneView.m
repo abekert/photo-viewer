@@ -8,6 +8,7 @@
 
 #import "SceneView.h"
 #import "Scene.h"
+#import "Frame.h"
 
 @implementation SceneView
 
@@ -26,9 +27,10 @@
 {
     SCNNode *cameraNode = [SCNNode node];
 	cameraNode.camera = [SCNCamera camera];
-	cameraNode.position = SCNVector3Make(0, 5, 100);
+	cameraNode.position = SCNVector3Make(0, 200, 10);
     cameraNode.rotation = SCNVector4Make(0, 0, 0, 0);
     cameraNode.camera.zFar = 1000000;
+    [self.scene.rootNode addChildNode:cameraNode];
     
     self.scene.rootNode.camera = cameraNode.camera;
     self.pointOfView = cameraNode;
@@ -62,6 +64,15 @@
 - (void)commonInit {
     // Register for the URL pasteboard type.
     [self registerForDraggedTypes:@[NSURLPboardType]];
+    
+    // Load a scene
+    Scene *scene = [Scene scene];
+    self.scene = scene;
+    
+    // Setup camera
+    SCNNode *cameraNode = [scene.rootNode childNodeWithName:@"camera" recursively:YES];
+    self.pointOfView = cameraNode;
+
 }
 
 - (id)initWithFrame:(NSRect)frameRect {
@@ -90,9 +101,7 @@
         
         NSString *pathExtension = [fileURL pathExtension];
         
-        if (([pathExtension isEqualToString:@"jpg"]) ||
-            ([pathExtension isEqualToString:@"jpeg"]) ||
-            ([pathExtension isEqualToString:@"png"]))
+        if ([[NSImage imageFileTypes] containsObject:pathExtension])
         {
             return NSDragOperationCopy;
         }
@@ -116,23 +125,85 @@
     if ([[pasteboard types] containsObject:NSURLPboardType]) {
         
         NSArray *urls = [pasteboard readObjectsForClasses:@[[NSURL class]] options:nil];
+        NSMutableArray *confirmedUrls = [[NSMutableArray alloc] initWithCapacity:urls.count];
+        
         for (NSURL *url in urls) {
-            NSLog(@"%@\n", url.path);
+//            NSLog(@"%@\n", url.path);
+            NSString *pathExtension = [url pathExtension];
+            if ([[NSImage imageFileTypes] containsObject:pathExtension])
+                [confirmedUrls addObject:url];
         }
         
-        
-//        NSURL *fileURL = [NSURL URLFromPasteboard:pasteboard];
-//        NSLog(@"%@", fileURL.description);
-        
         Scene *scene = (Scene *)self.scene;
-//        [scene.frame placeImageWithImageURL:fileURL];
-        [scene loadPicturesAtURLs:urls];
+        [scene loadPicturesAtURLs:confirmedUrls withCompletion:^{
+            [self accentCameraAtPhotoWithIndex:0];
+        }];
         
-//        [self loadSceneAtURL:fileURL];
         return YES;
     }
     
     return NO;
+}
+
+- (void)accentCameraAtPhotoWithIndex:(NSInteger)index
+{
+    Scene *scene = (Scene *)self.scene;
+    NSArray *pictures = scene.pictures;
+    if ((!pictures) ||
+        (pictures.count == 0))
+        return;
+    
+    if (index < 0) {
+        index = pictures.count - 1;
+    }
+    else
+        index = index % pictures.count;
+    currentPhotoIndex = index;
+    
+    Frame *picture = scene.pictures[index];
+    SCNNode *cameraNode = [scene.rootNode childNodeWithName:@"camera" recursively:YES];
+    
+    // Move spotlight
+    [scene focusSpotlightAt:picture];
+    
+    //long duration
+    float duration = 2.0;
+    
+    //animate the point of view with default timing function
+    [SCNTransaction begin];
+    [SCNTransaction setAnimationDuration:0.5];
+    [SCNTransaction setCompletionBlock:^{
+        [SCNTransaction begin];
+        [SCNTransaction setAnimationDuration:duration];
+        cameraNode.position = picture.cameraPosition;
+        [SCNTransaction commit];
+    }];
+    cameraNode.constraints = @[[SCNLookAtConstraint lookAtConstraintWithTarget:picture]];
+
+    [SCNTransaction commit];
+}
+
+- (void)keyUp:(NSEvent *)theEvent
+{
+    switch( [theEvent keyCode] ) {
+        case 126:       // up arrow
+        case 125:       // down arrow
+        case 124:       // right arrow
+            currentPhotoIndex++;
+            [self accentCameraAtPhotoWithIndex:currentPhotoIndex];
+            break;
+            
+        case 123:       // left arrow
+            currentPhotoIndex--;
+            [self accentCameraAtPhotoWithIndex:currentPhotoIndex];
+            break;
+            
+            NSLog(@"Arrow key pressed!");
+            break;
+        default:
+            NSLog(@"Key pressed: %@", theEvent);
+            break;
+    }
 }
 
 @end

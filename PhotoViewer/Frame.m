@@ -8,6 +8,8 @@
 
 #import "Frame.h"
 
+#define FRAME_HIGHT 60
+
 @implementation Frame
 
 - (id)initWithImage:(NSImage *)newImage
@@ -16,10 +18,11 @@
     if (self) {
         image = newImage;
         
+//        [self returnIfNeeded];
 //        [self initTestImage];
-        
+        [self addCamera];
         [self addFrame];
-        [self setFrameApects];
+//        [self setFrameApects];
         [self setFrameImage];
     }
     
@@ -34,38 +37,54 @@
 
 - (void)addFrame
 {
-    frame = [self addChildNodeNamed:@"Frame" fromSceneNamed:@"Frame"];
+    frame = [self addChildNodeNamed:@"frame-layer" fromSceneNamed:@"frames"];
 }
 
-- (void)setFrameApects
+- (void)addCamera
 {
-    if (!image) {
-        return;
+//    SCNNode *cameraNode = [SCNNode node];
+//	cameraNode.camera = [SCNCamera camera];
+//	cameraNode.position = SCNVector3Make(-100, 5, 0);
+//    cameraNode.rotation = SCNVector4Make(0, 0, 0, 0);
+//    cameraNode.camera.zFar = 1000000;
+
+    self.camera = [SCNCamera camera];
+    self.camera.zFar = 100000;
+}
+
+- (Orientation)orientation
+{
+    if (image) {
+        if (image.size.height > image.size.width) {
+            return OrientationVertical;
+        }
     }
     
-    float basicScale = 0.1;
-    
-    float x = 1 * basicScale * image.size.width / image.size.height;
-    float y = 2 * basicScale * image.size.height / image.size.width;
-    float z = basicScale;
-    
-    frame.scale = SCNVector3Make(x, y, z);
+    return OrientationHorizontal;
 }
 
 - (void)setFrameImage
 {
-    SCNNode *photoNode = [frame childNodeWithName:@"Photo" recursively:YES];
+    SCNNode *photoNode = [frame childNodeWithName:@"frame" recursively:YES];
     
-//    SCNMaterial *newPhotoMaterial = [SCNMaterial material];
+    if ([self orientation] == OrientationVertical) {
+        photoNode.rotation = SCNVector4Make(0, 1, 0, M_PI);
+        frame.position = SCNVector3Make(frame.position.x - 50, frame.position.y - 50, frame.position.z);
+        
+        image = [self rotateIndividualImage:image clockwise:NO];
+    }
+    else
+    {
+        photoNode.rotation = SCNVector4Make(0, 1, 0, M_PI_2);
+    }
     
-    SCNMaterial *photoMaterial = [photoNode.geometry materialWithName:@"Photo"];
+    SCNMaterial *photoMaterial = [photoNode.geometry materialWithName:@"photo"];
     photoMaterial.diffuse.contents = image;
 }
 
 - (void)placeImage:(NSImage *)newImage
 {
     image = newImage;
-    [self setFrameApects];
     [self setFrameImage];
 }
 
@@ -79,6 +98,64 @@
 {
     image = [[NSImage alloc] initWithContentsOfURL:url];
     [self placeImage:image];
+}
+
+- (SCNVector3)cameraPosition
+{
+    return SCNVector3Make(self.position.x + 20, self.position.y, self.position.z + 100);
+}
+
+- (SCNVector3)spotlightPosition
+{
+    return SCNVector3Make(self.position.x, self.position.y + 50, self.position.z + 10);
+}
+
+- (NSImage *)rotateIndividualImage: (NSImage *)sourceImage clockwise: (BOOL)clockwise
+{
+    NSImage *existingImage = sourceImage;
+    NSSize existingSize = sourceImage.size;
+    
+    /**
+     * Get the size of the original image in its raw bitmap format.
+     * The bestRepresentationForDevice: nil tells the NSImage to just
+     * give us the raw image instead of it's wacky DPI-translated version.
+     */
+//    existingSize.width = [[existingImage bestRepresentationForDevice: nil] pixelsWide];
+//    existingSize.height = [[existingImage bestRepresentationForDevice: nil] pixelsHigh];
+    
+    NSSize newSize = NSMakeSize(existingSize.height, existingSize.width);
+    NSImage *rotatedImage = [[NSImage alloc] initWithSize:newSize];
+    
+    [rotatedImage lockFocus];
+    
+    /**
+     * Apply the following transformations:
+     *
+     * - bring the rotation point to the centre of the image instead of
+     *   the default lower, left corner (0,0).
+     * - rotate it by 90 degrees, either clock or counter clockwise.
+     * - re-translate the rotated image back down to the lower left corner
+     *   so that it appears in the right place.
+     */
+    NSAffineTransform *rotateTF = [NSAffineTransform transform];
+    NSPoint centerPoint = NSMakePoint(newSize.width / 2, newSize.height / 2);
+    
+    [rotateTF translateXBy: centerPoint.x yBy: centerPoint.y];
+    [rotateTF rotateByDegrees: (clockwise) ? - 90 : 90];
+    [rotateTF translateXBy: -centerPoint.y yBy: -centerPoint.x];
+    [rotateTF concat];
+    
+    /**
+     * We have to get the image representation to do its drawing directly,
+     * because otherwise the stupid NSImage DPI thingie bites us in the butt
+     * again.
+     */
+    NSRect r1 = NSMakeRect(0, 0, newSize.height, newSize.width);
+    [[existingImage bestRepresentationForDevice: nil] drawInRect: r1];
+    
+    [rotatedImage unlockFocus];
+    
+    return rotatedImage;
 }
 
 @end

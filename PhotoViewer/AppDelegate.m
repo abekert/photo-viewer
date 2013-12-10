@@ -19,16 +19,13 @@
 
 - (void)awakeFromNib {
     // Configure the SCNView.
-    self.view.allowsCameraControl = YES;              // Allow the user to manipulate the 3D model using SCNView's default behavior.
+    self.view.allowsCameraControl = NO;              // Allow the user to manipulate the 3D model using SCNView's default behavior.
     self.view.jitteringEnabled = YES;                 // Improve the antialiasing when the scene is stationary.
     self.view.playing = YES;                          // Play the animations.
     self.view.autoenablesDefaultLighting = YES;       // Automatically light scenes that have no light.
-	self.view.backgroundColor = [NSColor grayColor]; // Set a black background.
+	self.view.backgroundColor = [NSColor blackColor]; // Set a black background.
     
-    // Load a scene
-    self.scene = [Scene scene];
     
-    self.view.scene = self.scene;
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {

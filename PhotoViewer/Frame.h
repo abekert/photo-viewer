@@ -9,6 +9,13 @@
 #import <SceneKit/SceneKit.h>
 #import "SCNNode+Utils.h"
 
+typedef NS_ENUM(NSInteger, Orientation)
+{
+    OrientationHorizontal,
+    OrientationVertical
+};
+
+
 @interface Frame : SCNNode
 {
     NSImage *image;
@@ -19,5 +26,9 @@
 - (void)placeImage:(NSImage *)newImage;
 - (void)placeImageWithImagePath:(NSString *)path;
 - (void)placeImageWithImageURL:(NSURL *)url;
+
+- (SCNVector3)cameraPosition;
+- (SCNVector3)spotlightPosition;
+
 
 @end
