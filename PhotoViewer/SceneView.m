@@ -26,7 +26,8 @@
     SCNNode *cameraNode = [scene.rootNode childNodeWithName:@"camera" recursively:YES];
     self.pointOfView = cameraNode;
     
-    self.showsStatistics = YES;
+    // Debug Info
+//    self.showsStatistics = YES;
 }
 
 - (id)initWithFrame:(NSRect)frameRect {
@@ -105,8 +106,7 @@
 {
     Scene *scene = (Scene *)self.scene;
     NSArray *pictures = scene.pictures;
-    if ((!pictures) ||
-        (pictures.count == 0))
+    if ((!pictures) || (pictures.count == 0))
         return;
     
     if (index < 0) {
@@ -114,6 +114,7 @@
     }
     else
         index = index % pictures.count;
+
     currentPhotoIndex = index;
     
     Frame *picture = scene.pictures[index];
@@ -122,28 +123,44 @@
     // Move spotlight
     [scene focusSpotlightAt:picture];
     
-    //long duration
-    float duration = 2.0;
+    // Camera
+    SCNVector3 destinationCamera = picture.cameraPosition;
+    SCNVector4 temporaryRotation = [self cameraRotationForCameraPosition:cameraNode.position andPicture:picture];
+    SCNVector4 destinationRotation = [self cameraRotationForCameraPosition:destinationCamera andPicture:picture];
+
     
-    //animate the point of view with default timing function
     [SCNTransaction begin];
     [SCNTransaction setAnimationDuration:0.5];
     [SCNTransaction setCompletionBlock:^{
         [SCNTransaction begin];
-        [SCNTransaction setAnimationDuration:duration];
-        cameraNode.position = picture.cameraPosition;
+        [SCNTransaction setAnimationDuration:2];
+        cameraNode.position = destinationCamera;
+        cameraNode.rotation = destinationRotation;
+        cameraNode.camera.focalSize = scene.defaultFocalSize;
         [SCNTransaction commit];
     }];
-    cameraNode.constraints = @[[SCNLookAtConstraint lookAtConstraintWithTarget:picture]];
+    
+    cameraNode.rotation = temporaryRotation;
+    cameraNode.camera.focalSize = 800;
+//    cameraNode.constraints = @[[SCNLookAtConstraint lookAtConstraintWithTarget:picture]];
 
     [SCNTransaction commit];
+}
+
+- (SCNVector4)cameraRotationForCameraPosition:(SCNVector3)cameraPosition andPicture:(SCNNode *)node
+{
+    double angle = atan(fabs(cameraPosition.x - node.position.x) / fabs(cameraPosition.z - node.position.z));
+    
+    if (cameraPosition.x > node.position.x) {
+        return SCNVector4Make(0, 1, 0, angle);
+    }
+    else
+        return SCNVector4Make(0, 1, 0, -angle);
 }
 
 - (void)keyUp:(NSEvent *)theEvent
 {
     switch( [theEvent keyCode] ) {
-        case 126:       // up arrow
-        case 125:       // down arrow
         case 124:       // right arrow
             currentPhotoIndex++;
             [self accentCameraAtPhotoWithIndex:currentPhotoIndex];
@@ -154,10 +171,7 @@
             [self accentCameraAtPhotoWithIndex:currentPhotoIndex];
             break;
             
-            NSLog(@"Arrow key pressed!");
-            break;
         default:
-            NSLog(@"Key pressed: %@", theEvent);
             break;
     }
 }

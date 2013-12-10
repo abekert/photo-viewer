@@ -82,7 +82,7 @@
 
 - (SCNVector3)cameraPosition
 {
-    return SCNVector3Make(self.position.x + 20, self.position.y, self.position.z + 100);
+    return SCNVector3Make(self.position.x + 20, self.position.y + 15, self.position.z + 100);
 }
 
 - (SCNVector3)spotlightPosition

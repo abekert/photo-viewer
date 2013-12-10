@@ -8,6 +8,8 @@
 
 #import "Scene.h"
 
+#define DISTANCE 120
+
 @implementation Scene
 
 - (id)init
@@ -26,7 +28,6 @@
 {
     [self addFloor];
     [self addLight];
-//    [self addFrameWithImage:nil];
     [self addText:@"Drag your photos here"];
 }
 
@@ -45,10 +46,11 @@
     [cameraNode.light setAttribute:@1 forKey:SCNLightSpotInnerAngleKey];
     [cameraNode.light setAttribute:@100 forKey:SCNLightSpotOuterAngleKey];
     
-    cameraNode.camera.zFar = 10000;
+    cameraNode.camera.zFar = 5000;
     cameraNode.name = @"camera";
     
     [self.rootNode addChildNode:cameraNode];
+    [self resetCamera];
 }
 
 - (void)adjustCamera
@@ -61,6 +63,9 @@
         
         [SCNTransaction begin];
         [SCNTransaction setAnimationDuration:0.3];
+//        [SCNTransaction setCompletionBlock:^{
+//            [self resetCamera];
+//        }];
 
         cameraNode.camera.focalDistance = 130;
         cameraNode.camera.focalBlurRadius = 10;
@@ -86,12 +91,17 @@
     [SCNTransaction begin];
     [SCNTransaction setAnimationDuration:2];
     
-    cameraNode.camera.focalDistance = 0;
-    cameraNode.camera.focalBlurRadius = 0;
-    cameraNode.camera.focalSize = 0;
-    cameraNode.camera.aperture = 0;
+    cameraNode.camera.focalDistance = 100;
+    cameraNode.camera.focalBlurRadius = 5;
+    cameraNode.camera.focalSize = 150;
+    cameraNode.camera.aperture = 0.5;
     
     [SCNTransaction commit];
+}
+
+- (double)defaultFocalSize
+{
+    return 70;
 }
 
 #pragma mark Floor
@@ -217,7 +227,7 @@
         Frame *frame = [self addFrameWithImage:image];
         frame.position = SCNVector3Make(frame.position.x + xPosition, frame.position.y, frame.position.z);
 
-        xPosition += 100;
+        xPosition += DISTANCE;
         
         [_pictures addObject:frame];
     }

@@ -19,5 +19,6 @@
 - (void)loadPicturesAtURLs:(NSArray *)urls;
 - (void)loadPicturesAtURLs:(NSArray *)urls withCompletion:(void (^)(void))block;
 - (void)focusSpotlightAt:(SCNNode *)node;
+- (double)defaultFocalSize;
 
 @end
