@@ -91,9 +91,9 @@
     [SCNTransaction begin];
     [SCNTransaction setAnimationDuration:2];
     
-    cameraNode.camera.focalDistance = 90;
+    cameraNode.camera.focalDistance = 120;
     cameraNode.camera.focalBlurRadius = 5;
-    cameraNode.camera.focalSize = 40;
+    cameraNode.camera.focalSize = 60;
     cameraNode.camera.aperture = 0.5;
     
     [SCNTransaction commit];

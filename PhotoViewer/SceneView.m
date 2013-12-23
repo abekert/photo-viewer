@@ -30,7 +30,7 @@
     videoFormats = @[@"m4v", @"mpg", @"mp4"];
     
     // Debug Info
-    self.showsStatistics = YES;
+//    self.showsStatistics = YES;
 }
 
 - (id)initWithFrame:(NSRect)frameRect {
@@ -106,7 +106,7 @@
         
         Scene *scene = (Scene *)self.scene;
         [scene loadPicturesAtURLs:photoUrls videosURLs:videoUrls withCompletion:^{
-            [self accentCameraAtPhotoWithIndex:0];
+            [self accentCameraAtPhotoWithIndex:0 needToPutOutOfFocus:NO];
         }];
 
         
@@ -118,13 +118,15 @@
 
 #pragma mark Transitions
 
-- (void)accentCameraAtPhotoWithIndex:(NSInteger)index
+- (void)accentCameraAtPhotoWithIndex:(NSInteger)index needToPutOutOfFocus:(BOOL)needToPutOutOfFocus
 {
     Scene *scene = (Scene *)self.scene;
     NSArray *pictures = scene.pictures;
     
     // Put current picture out of focus
-    [scene.pictures[currentPhotoIndex] putOutFocus];
+    if (needToPutOutOfFocus) {
+        [scene.pictures[currentPhotoIndex] putOutFocus];
+    }
     
     if ((!pictures) || (pictures.count == 0))
         return;
@@ -184,11 +186,11 @@
 {
     switch( [theEvent keyCode] ) {
         case 124:       // right arrow
-            [self accentCameraAtPhotoWithIndex:currentPhotoIndex + 1];
+            [self accentCameraAtPhotoWithIndex:currentPhotoIndex + 1 needToPutOutOfFocus:YES];
             break;
             
         case 123:       // left arrow
-            [self accentCameraAtPhotoWithIndex:currentPhotoIndex - 1];
+            [self accentCameraAtPhotoWithIndex:currentPhotoIndex - 1 needToPutOutOfFocus:YES];
             break;
             
         default:
