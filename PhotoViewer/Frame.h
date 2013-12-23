@@ -9,6 +9,8 @@
 #import <SceneKit/SceneKit.h>
 #import "SCNNode+Utils.h"
 
+#import <AVFoundation/AVFoundation.h>
+
 typedef NS_ENUM(NSInteger, Orientation)
 {
     OrientationHorizontal,
@@ -20,6 +22,11 @@ typedef NS_ENUM(NSInteger, Orientation)
 {
     NSImage *image;
     SCNNode *frame;
+    
+    bool startedPlayerLayer;
+    AVPlayerItem *playerItem;
+    AVPlayer *player;
+    AVPlayerLayer *playerLayer;
 }
 
 - (id)initWithImage:(NSImage *)image;
@@ -30,5 +37,9 @@ typedef NS_ENUM(NSInteger, Orientation)
 - (SCNVector3)cameraPosition;
 - (SCNVector3)spotlightPosition;
 
+- (id)initWithVideoPlayerItem:(AVPlayerItem *)playerItem;
+
+- (void)putInFocus;
+- (void)putOutFocus;
 
 @end

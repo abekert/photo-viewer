@@ -8,7 +8,7 @@
 
 #import "Scene.h"
 
-#define DISTANCE 120
+#define DISTANCE 105
 
 @implementation Scene
 
@@ -67,9 +67,9 @@
 //            [self resetCamera];
 //        }];
 
-        cameraNode.camera.focalDistance = 130;
+        cameraNode.camera.focalDistance = 90;
         cameraNode.camera.focalBlurRadius = 10;
-        cameraNode.camera.focalSize = 60;
+        cameraNode.camera.focalSize = 50;
         cameraNode.camera.aperture = 0.5;
 
         [SCNTransaction commit];
@@ -91,9 +91,9 @@
     [SCNTransaction begin];
     [SCNTransaction setAnimationDuration:2];
     
-    cameraNode.camera.focalDistance = 100;
+    cameraNode.camera.focalDistance = 90;
     cameraNode.camera.focalBlurRadius = 5;
-    cameraNode.camera.focalSize = 150;
+    cameraNode.camera.focalSize = 40;
     cameraNode.camera.aperture = 0.5;
     
     [SCNTransaction commit];
@@ -101,7 +101,7 @@
 
 - (double)defaultFocalSize
 {
-    return 70;
+    return 25;
 }
 
 #pragma mark Floor
@@ -220,6 +220,11 @@
     cameraNode.rotation = SCNVector4Make(0, 0, 0, 0);
     
     [self clearPictures];
+    
+    if ((!urls) || (urls.count == 0)) {
+        return;
+    }
+
     _pictures = [[NSMutableArray alloc] initWithCapacity:urls.count];
     
     for (NSURL *url in urls) {
@@ -231,8 +236,49 @@
         
         [_pictures addObject:frame];
     }
-    [self focusSpotlightAt:_pictures[0]];
+    
     [self hideTextWithCompletion:block];
+    [self focusSpotlightAt:_pictures[0]];
+    [self adjustCamera];
+}
+
+- (void)loadPicturesAtURLs:(NSArray *)urls videosURLs:(NSArray *)videoURLs withCompletion:(void (^)(void))block
+{
+    SCNNode *cameraNode = [self.rootNode childNodeWithName:@"camera" recursively:YES];
+    cameraNode.rotation = SCNVector4Make(0, 0, 0, 0);
+    
+    [self clearPictures];
+
+    _pictures = [[NSMutableArray alloc] initWithCapacity:(urls.count + videoURLs.count)];
+    
+    if ((urls) && (urls.count != 0)) {
+        for (NSURL *url in urls) {
+            NSImage *image = [[NSImage alloc] initWithContentsOfURL:url];
+            Frame *frame = [self addFrameWithImage:image];
+            frame.position = SCNVector3Make(frame.position.x + xPosition, frame.position.y, frame.position.z);
+            
+            xPosition += DISTANCE;
+            
+            [_pictures addObject:frame];
+        }
+    }
+
+    if ((videoURLs) && (videoURLs.count != 0)) {
+        for (NSURL *url in videoURLs) {
+
+            AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:url];
+            
+            Frame *frame = [self addFrameWithPlayerItem:playerItem];
+            frame.position = SCNVector3Make(frame.position.x + xPosition, frame.position.y, frame.position.z);
+            
+            xPosition += DISTANCE;
+            
+            [_pictures addObject:frame];
+        }
+    }
+    
+    [self hideTextWithCompletion:block];
+    [self focusSpotlightAt:_pictures[0]];
     [self adjustCamera];
 }
 
@@ -256,6 +302,25 @@
     return frame;
 }
 
+- (Frame *)addFrameWithPlayerItem:(AVPlayerItem *)playerItem
+{
+    Frame *frame = [[Frame alloc] initWithVideoPlayerItem:playerItem];
+    [self.rootNode addChildNode:frame];
+    frame.name = @"frame";
+    
+    frame.opacity = 0;
+    frame.position = SCNVector3Make(frame.position.x, frame.position.y + 50, frame.position.z - 200);
+    
+    [SCNTransaction begin];
+    [SCNTransaction setAnimationDuration:2];
+    
+    frame.position = SCNVector3Make(frame.position.x, frame.position.y, frame.position.z + 200);
+    frame.opacity = 1;
+    
+    [SCNTransaction commit];
+    
+    return frame;
+}
 
 - (void)clearPictures
 {
@@ -271,7 +336,6 @@
         node.opacity = 0;
         
         [SCNTransaction commit];
-
     }
     
     [_pictures removeAllObjects];

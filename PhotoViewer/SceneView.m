@@ -26,8 +26,11 @@
     SCNNode *cameraNode = [scene.rootNode childNodeWithName:@"camera" recursively:YES];
     self.pointOfView = cameraNode;
     
+    // Video formats
+    videoFormats = @[@"m4v", @"mpg", @"mp4"];
+    
     // Debug Info
-//    self.showsStatistics = YES;
+    self.showsStatistics = YES;
 }
 
 - (id)initWithFrame:(NSRect)frameRect {
@@ -60,6 +63,10 @@
         {
             return NSDragOperationCopy;
         }
+        
+        if ([videoFormats containsObject:pathExtension]) {
+            return NSDragOperationCopy;
+        }
     }
     
     return NSDragOperationNone;
@@ -80,19 +87,28 @@
     if ([[pasteboard types] containsObject:NSURLPboardType]) {
         
         NSArray *urls = [pasteboard readObjectsForClasses:@[[NSURL class]] options:nil];
-        NSMutableArray *confirmedUrls = [[NSMutableArray alloc] initWithCapacity:urls.count];
-        
+        NSMutableArray *photoUrls = [[NSMutableArray alloc] initWithCapacity:urls.count];
+        NSMutableArray *videoUrls = [[NSMutableArray alloc] initWithCapacity:urls.count];
+
         for (NSURL *url in urls) {
 //            NSLog(@"%@\n", url.path);
             NSString *pathExtension = [url pathExtension];
             if ([[NSImage imageFileTypes] containsObject:pathExtension])
-                [confirmedUrls addObject:url];
+                [photoUrls addObject:url];
+        }
+        
+        for (NSURL *url in urls) {
+//            NSLog(@"%@\n", url.path);
+            NSString *pathExtension = [url pathExtension];
+            if ([videoFormats containsObject:pathExtension])
+                [videoUrls addObject:url];
         }
         
         Scene *scene = (Scene *)self.scene;
-        [scene loadPicturesAtURLs:confirmedUrls withCompletion:^{
+        [scene loadPicturesAtURLs:photoUrls videosURLs:videoUrls withCompletion:^{
             [self accentCameraAtPhotoWithIndex:0];
         }];
+
         
         return YES;
     }
@@ -106,6 +122,10 @@
 {
     Scene *scene = (Scene *)self.scene;
     NSArray *pictures = scene.pictures;
+    
+    // Put current picture out of focus
+    [scene.pictures[currentPhotoIndex] putOutFocus];
+    
     if ((!pictures) || (pictures.count == 0))
         return;
     
@@ -120,6 +140,9 @@
     Frame *picture = scene.pictures[index];
     SCNNode *cameraNode = [scene.rootNode childNodeWithName:@"camera" recursively:YES];
     
+    // Put picture in focus
+    [picture putInFocus];
+    
     // Move spotlight
     [scene focusSpotlightAt:picture];
     
@@ -128,7 +151,6 @@
     SCNVector4 temporaryRotation = [self cameraRotationForCameraPosition:cameraNode.position andPicture:picture];
     SCNVector4 destinationRotation = [self cameraRotationForCameraPosition:destinationCamera andPicture:picture];
 
-    
     [SCNTransaction begin];
     [SCNTransaction setAnimationDuration:0.5];
     [SCNTransaction setCompletionBlock:^{
@@ -141,7 +163,7 @@
     }];
     
     cameraNode.rotation = temporaryRotation;
-    cameraNode.camera.focalSize = 800;
+    cameraNode.camera.focalSize = 200;
 //    cameraNode.constraints = @[[SCNLookAtConstraint lookAtConstraintWithTarget:picture]];
 
     [SCNTransaction commit];
@@ -162,13 +184,11 @@
 {
     switch( [theEvent keyCode] ) {
         case 124:       // right arrow
-            currentPhotoIndex++;
-            [self accentCameraAtPhotoWithIndex:currentPhotoIndex];
+            [self accentCameraAtPhotoWithIndex:currentPhotoIndex + 1];
             break;
             
         case 123:       // left arrow
-            currentPhotoIndex--;
-            [self accentCameraAtPhotoWithIndex:currentPhotoIndex];
+            [self accentCameraAtPhotoWithIndex:currentPhotoIndex - 1];
             break;
             
         default:

@@ -21,4 +21,6 @@
 - (void)focusSpotlightAt:(SCNNode *)node;
 - (double)defaultFocalSize;
 
+- (void)loadPicturesAtURLs:(NSArray *)urls videosURLs:(NSArray *)videoURLs withCompletion:(void (^)(void))block;
+
 @end

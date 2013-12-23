@@ -11,6 +11,8 @@
 @interface SceneView : SCNView
 {
     NSInteger currentPhotoIndex;
+    
+    NSArray *videoFormats;
 }
 @property SCNMaterial *selectedMaterial;
 
