@@ -98,7 +98,6 @@
 
         [self addFrame];
         [self loadPlayer];
-        
     }
     
     return self;
@@ -122,6 +121,8 @@
     [playerLayer setFrame:CGRectMake(0, 0, 640, 360)];
 
 }
+
+#pragma mark - Camera focus
 
 - (void)putInFocus
 {
@@ -162,9 +163,7 @@
 - (void)removeFromParentNode
 {
     [self putOutFocus];
-    
     [super removeFromParentNode];
 }
-
 
 @end

@@ -8,9 +8,12 @@
 
 #import "Scene.h"
 
-#define DISTANCE 105
+#define DISTANCE_BETWEEN_FRAMES 105
 
 @implementation Scene
+{
+    NSInteger xPosition;
+}
 
 - (id)init
 {
@@ -69,7 +72,7 @@
 
         cameraNode.camera.focalDistance = 90;
         cameraNode.camera.focalBlurRadius = 10;
-        cameraNode.camera.focalSize = 50;
+        cameraNode.camera.focalSize = 90;
         cameraNode.camera.aperture = 0.5;
 
         [SCNTransaction commit];
@@ -185,7 +188,7 @@
     
     textNode.position = SCNVector3Make(0, 0, 0);
     textNode.opacity = 1;
-
+    
     [SCNTransaction commit];
 }
 
@@ -209,39 +212,6 @@
 
 #pragma mark Pictures
 
-- (void)loadPicturesAtURLs:(NSArray *)urls
-{
-    [self loadPicturesAtURLs:urls withCompletion:nil];
-}
-
-- (void)loadPicturesAtURLs:(NSArray *)urls withCompletion:(void (^)(void))block
-{
-    SCNNode *cameraNode = [self.rootNode childNodeWithName:@"camera" recursively:YES];
-    cameraNode.rotation = SCNVector4Make(0, 0, 0, 0);
-    
-    [self clearPictures];
-    
-    if ((!urls) || (urls.count == 0)) {
-        return;
-    }
-
-    _pictures = [[NSMutableArray alloc] initWithCapacity:urls.count];
-    
-    for (NSURL *url in urls) {
-        NSImage *image = [[NSImage alloc] initWithContentsOfURL:url];
-        Frame *frame = [self addFrameWithImage:image];
-        frame.position = SCNVector3Make(frame.position.x + xPosition, frame.position.y, frame.position.z);
-
-        xPosition += DISTANCE;
-        
-        [_pictures addObject:frame];
-    }
-    
-    [self hideTextWithCompletion:block];
-    [self focusSpotlightAt:_pictures[0]];
-    [self adjustCamera];
-}
-
 - (void)loadPicturesAtURLs:(NSArray *)urls videosURLs:(NSArray *)videoURLs withCompletion:(void (^)(void))block
 {
     SCNNode *cameraNode = [self.rootNode childNodeWithName:@"camera" recursively:YES];
@@ -249,62 +219,47 @@
     
     [self clearPictures];
 
-    _pictures = [[NSMutableArray alloc] initWithCapacity:(urls.count + videoURLs.count)];
+    NSMutableArray *objectsToDisplay = [[NSMutableArray alloc] initWithCapacity:urls.count + videoURLs.count];
     
-    if ((urls) && (urls.count != 0)) {
-        for (NSURL *url in urls) {
-            NSImage *image = [[NSImage alloc] initWithContentsOfURL:url];
-            Frame *frame = [self addFrameWithImage:image];
-            frame.position = SCNVector3Make(frame.position.x + xPosition, frame.position.y, frame.position.z);
-            
-            xPosition += DISTANCE;
-            
-            [_pictures addObject:frame];
-        }
+    for (NSURL *url in urls) {
+        NSImage *image = [[NSImage alloc] initWithContentsOfURL:url];
+        [objectsToDisplay addObject:image];
     }
-
-    if ((videoURLs) && (videoURLs.count != 0)) {
-        for (NSURL *url in videoURLs) {
-
-            AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:url];
-            
-            Frame *frame = [self addFrameWithPlayerItem:playerItem];
-            frame.position = SCNVector3Make(frame.position.x + xPosition, frame.position.y, frame.position.z);
-            
-            xPosition += DISTANCE;
-            
-            [_pictures addObject:frame];
-        }
+    
+    for (NSURL *url in videoURLs) {
+        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:url];
+        [objectsToDisplay addObject:playerItem];
+    }
+    
+    _frames = [[NSMutableArray alloc] initWithCapacity:objectsToDisplay.count];
+    
+    for (NSObject *objectToDisplay in objectsToDisplay)
+    {
+        Frame *frame = [self addFrameWithObject:objectToDisplay];
+        frame.position = SCNVector3Make(frame.position.x + xPosition, frame.position.y, frame.position.z);
+        
+        xPosition += DISTANCE_BETWEEN_FRAMES;
+        
+        [_frames addObject:frame];
     }
     
     [self hideTextWithCompletion:block];
-    [self focusSpotlightAt:_pictures[0]];
+    [self focusSpotlightAt:_frames[0]];
     [self adjustCamera];
 }
 
-- (Frame *)addFrameWithImage:(NSImage *)image
+- (Frame *)addFrameWithObject:(NSObject *)object
 {
-    Frame *frame = [[Frame alloc] initWithImage:image];
-    [self.rootNode addChildNode:frame];
-    frame.name = @"frame";
-
-    frame.opacity = 0;
-    frame.position = SCNVector3Make(frame.position.x, frame.position.y + 50, frame.position.z - 200);
+    Frame *frame;
     
-    [SCNTransaction begin];
-    [SCNTransaction setAnimationDuration:2];
-
-    frame.position = SCNVector3Make(frame.position.x, frame.position.y, frame.position.z + 200);
-    frame.opacity = 1;
+    if ([[object class] isSubclassOfClass:[NSImage class]])
+        frame = [[Frame alloc] initWithImage:(NSImage *)object];
     
-    [SCNTransaction commit];
-
-    return frame;
-}
-
-- (Frame *)addFrameWithPlayerItem:(AVPlayerItem *)playerItem
-{
-    Frame *frame = [[Frame alloc] initWithVideoPlayerItem:playerItem];
+    if ([[object class] isSubclassOfClass:[AVPlayerItem class]])
+        frame = [[Frame alloc] initWithVideoPlayerItem:(AVPlayerItem *)object];
+    
+    if (!frame) return nil;
+    
     [self.rootNode addChildNode:frame];
     frame.name = @"frame";
     
@@ -325,7 +280,8 @@
 - (void)clearPictures
 {
     xPosition = 0;
-    for (SCNNode *node in _pictures) {
+    
+    for (SCNNode *node in _frames) {
         [SCNTransaction begin];
         [SCNTransaction setAnimationDuration:2];
         [SCNTransaction setCompletionBlock:^{
@@ -338,8 +294,8 @@
         [SCNTransaction commit];
     }
     
-    [_pictures removeAllObjects];
-    _pictures = nil;
+    [_frames removeAllObjects];
+    _frames = nil;
 }
 
 @end

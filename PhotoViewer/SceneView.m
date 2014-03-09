@@ -11,6 +11,10 @@
 #import "Frame.h"
 
 @implementation SceneView
+{
+    NSInteger currentPhotoIndex;
+    NSArray *videoFormats;
+}
 
 #pragma mark - Init
 
@@ -30,7 +34,7 @@
     videoFormats = @[@"m4v", @"mpg", @"mp4"];
     
     // Debug Info
-//    self.showsStatistics = YES;
+    self.showsStatistics = YES;
 }
 
 - (id)initWithFrame:(NSRect)frameRect {
@@ -48,10 +52,6 @@
 }
 
 #pragma mark - Drag and drop
-
-/*
- Support drag and drop of new dae files.
- */
 
 - (NSDragOperation)dragOperationForPasteboard:(NSPasteboard *)pasteboard {
     if ([[pasteboard types] containsObject:NSURLPboardType]) {
@@ -91,14 +91,12 @@
         NSMutableArray *videoUrls = [[NSMutableArray alloc] initWithCapacity:urls.count];
 
         for (NSURL *url in urls) {
-//            NSLog(@"%@\n", url.path);
             NSString *pathExtension = [url pathExtension];
             if ([[NSImage imageFileTypes] containsObject:pathExtension])
                 [photoUrls addObject:url];
         }
         
         for (NSURL *url in urls) {
-//            NSLog(@"%@\n", url.path);
             NSString *pathExtension = [url pathExtension];
             if ([videoFormats containsObject:pathExtension])
                 [videoUrls addObject:url];
@@ -121,25 +119,27 @@
 - (void)accentCameraAtPhotoWithIndex:(NSInteger)index needToPutOutOfFocus:(BOOL)needToPutOutOfFocus
 {
     Scene *scene = (Scene *)self.scene;
-    NSArray *pictures = scene.pictures;
-    
-    // Put current picture out of focus
-    if (needToPutOutOfFocus) {
-        [scene.pictures[currentPhotoIndex] putOutFocus];
-    }
+    NSArray *pictures = scene.frames;
     
     if ((!pictures) || (pictures.count == 0))
         return;
     
+    // Correct index if needed
     if (index < 0) {
         index = pictures.count - 1;
     }
     else
         index = index % pictures.count;
+    
+    // Put current picture out of focus
+    if (needToPutOutOfFocus) {
+        [scene.frames[currentPhotoIndex] putOutFocus];
+    }
 
+    // Save new photo index
     currentPhotoIndex = index;
     
-    Frame *picture = scene.pictures[index];
+    Frame *picture = scene.frames[index];
     SCNNode *cameraNode = [scene.rootNode childNodeWithName:@"camera" recursively:YES];
     
     // Put picture in focus
@@ -153,6 +153,7 @@
     SCNVector4 temporaryRotation = [self cameraRotationForCameraPosition:cameraNode.position andPicture:picture];
     SCNVector4 destinationRotation = [self cameraRotationForCameraPosition:destinationCamera andPicture:picture];
 
+    // Animate transaction
     [SCNTransaction begin];
     [SCNTransaction setAnimationDuration:0.5];
     [SCNTransaction setCompletionBlock:^{
@@ -166,14 +167,12 @@
     
     cameraNode.rotation = temporaryRotation;
     cameraNode.camera.focalSize = 200;
-//    cameraNode.constraints = @[[SCNLookAtConstraint lookAtConstraintWithTarget:picture]];
-
     [SCNTransaction commit];
 }
 
 - (SCNVector4)cameraRotationForCameraPosition:(SCNVector3)cameraPosition andPicture:(SCNNode *)node
 {
-    double angle = atan(fabs(cameraPosition.x - node.position.x) / fabs(cameraPosition.z - node.position.z));
+    double angle = atan(fabsf(cameraPosition.x - node.position.x) / fabsf(cameraPosition.z - node.position.z));
     
     if (cameraPosition.x > node.position.x) {
         return SCNVector4Make(0, 1, 0, angle);

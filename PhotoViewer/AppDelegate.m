@@ -24,8 +24,6 @@
     self.view.playing = YES;                          // Play the animations.
     self.view.autoenablesDefaultLighting = YES;       // Automatically light scenes that have no light.
 	self.view.backgroundColor = [NSColor blackColor]; // Set a black background.
-    
-    
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {

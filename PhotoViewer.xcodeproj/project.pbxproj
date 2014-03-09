@@ -26,14 +26,11 @@
 		9DFF84DE18441ACB009A1F19 /* gloss.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DFF84DB18441ACB009A1F19 /* gloss.png */; };
 		9DFF84E118441C3D009A1F19 /* SceneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF84E018441C3D009A1F19 /* SceneView.m */; };
 		9DFF84E418441CEE009A1F19 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF84E318441CEE009A1F19 /* Scene.m */; };
-		9DFF84E61844290C009A1F19 /* floor-frames.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DFF84E51844290C009A1F19 /* floor-frames.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9D21DA7518440878000C555F /* PhotoViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D21DA7818440878000C555F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		9D21DA7B18440878000C555F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		9D21DA7C18440878000C555F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9D21DA7D18440878000C555F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9D21DA8018440878000C555F /* PhotoViewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoViewer-Info.plist"; sourceTree = "<group>"; };
 		9D21DA8218440878000C555F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -44,9 +41,6 @@
 		9D21DA8B18440878000C555F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9D21DA8E18440878000C555F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		9D21DA9018440878000C555F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		9D21DA9E18440878000C555F /* PhotoViewerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoViewerTests-Info.plist"; sourceTree = "<group>"; };
-		9D21DAA018440878000C555F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9D21DAA218440878000C555F /* PhotoViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoViewerTests.m; sourceTree = "<group>"; };
 		9D21DAAC18440AB0000C555F /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		9D21DAAE18440ACE000C555F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9D5313BB186769F600BEB796 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -63,7 +57,6 @@
 		9DFF84E018441C3D009A1F19 /* SceneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneView.m; sourceTree = "<group>"; };
 		9DFF84E218441CEE009A1F19 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
 		9DFF84E318441CEE009A1F19 /* Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scene.m; sourceTree = "<group>"; };
-		9DFF84E51844290C009A1F19 /* floor-frames.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "floor-frames.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				9D21DAB218440AF5000C555F /* Resources */,
-				9DFF84E51844290C009A1F19 /* floor-frames.jpg */,
 				9D21DA7E18440878000C555F /* PhotoViewer */,
-				9D21DA9C18440878000C555F /* PhotoViewerTests */,
 				9D21DA7718440878000C555F /* Frameworks */,
 				9D21DA7618440878000C555F /* Products */,
 			);
@@ -108,19 +99,9 @@
 				9D21DAAE18440ACE000C555F /* QuartzCore.framework */,
 				9D21DAAC18440AB0000C555F /* SceneKit.framework */,
 				9D21DA7818440878000C555F /* Cocoa.framework */,
-				9D21DA7A18440878000C555F /* Other Frameworks */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9D21DA7A18440878000C555F /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				9D21DA7B18440878000C555F /* AppKit.framework */,
-				9D21DA7C18440878000C555F /* CoreData.framework */,
 				9D21DA7D18440878000C555F /* Foundation.framework */,
 			);
-			name = "Other Frameworks";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		9D21DA7E18440878000C555F /* PhotoViewer */ = {
@@ -151,24 +132,6 @@
 				9D21DA8418440878000C555F /* main.m */,
 				9D21DA8618440878000C555F /* PhotoViewer-Prefix.pch */,
 				9D21DA8718440878000C555F /* Credits.rtf */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		9D21DA9C18440878000C555F /* PhotoViewerTests */ = {
-			isa = PBXGroup;
-			children = (
-				9D21DAA218440878000C555F /* PhotoViewerTests.m */,
-				9D21DA9D18440878000C555F /* Supporting Files */,
-			);
-			path = PhotoViewerTests;
-			sourceTree = "<group>";
-		};
-		9D21DA9D18440878000C555F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				9D21DA9E18440878000C555F /* PhotoViewerTests-Info.plist */,
-				9D21DA9F18440878000C555F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -254,7 +217,6 @@
 				9D21DA8918440878000C555F /* Credits.rtf in Resources */,
 				9DBB44F61856A77C008D988A /* frame.png in Resources */,
 				9DBB44F71856A77C008D988A /* leather-bump.jpg in Resources */,
-				9DFF84E61844290C009A1F19 /* floor-frames.jpg in Resources */,
 				9D21DA8F18440878000C555F /* MainMenu.xib in Resources */,
 				9DBB44F81856A77C008D988A /* leather.jpg in Resources */,
 			);
@@ -301,14 +263,6 @@
 				9D21DA8E18440878000C555F /* Base */,
 			);
 			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		9D21DA9F18440878000C555F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9D21DAA018440878000C555F /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
