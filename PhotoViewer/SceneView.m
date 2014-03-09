@@ -34,7 +34,7 @@
     videoFormats = @[@"m4v", @"mpg", @"mp4"];
     
     // Debug Info
-    self.showsStatistics = YES;
+//    self.showsStatistics = YES;
 }
 
 - (id)initWithFrame:(NSRect)frameRect {
