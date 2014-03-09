@@ -1,6 +1,8 @@
 PhotoViewer
 ===========
 
-OS X 3D Photo Viewer Application. This application was made as a university task.
+View your pictures and videos in a virtual 3D gallery. Drag'n'drop your files and ready to go!
 
-Uses Scene Kit. Requires OS X 10.9 and higher.
+Application was made during I had fun with Scene Kit.
+
+Requires OS X 10.9 and higher.
