@@ -17,6 +17,7 @@
 		9D21DAAD18440AB0000C555F /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21DAAC18440AB0000C555F /* SceneKit.framework */; };
 		9D21DAAF18440ACE000C555F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D21DAAE18440ACE000C555F /* QuartzCore.framework */; };
 		9D5313BC186769F600BEB796 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5313BB186769F600BEB796 /* AVFoundation.framework */; };
+		9D6FB017193218480038682C /* floor-frames.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9D6FB016193218480038682C /* floor-frames.jpg */; };
 		9DA1410E1844A24E0074CA35 /* Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA1410D1844A24E0074CA35 /* Frame.m */; };
 		9DBB44F61856A77C008D988A /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DBB44F31856A77C008D988A /* frame.png */; };
 		9DBB44F71856A77C008D988A /* leather-bump.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9DBB44F41856A77C008D988A /* leather-bump.jpg */; };
@@ -44,6 +45,7 @@
 		9D21DAAC18440AB0000C555F /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		9D21DAAE18440ACE000C555F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9D5313BB186769F600BEB796 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9D6FB016193218480038682C /* floor-frames.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "floor-frames.jpg"; sourceTree = "<group>"; };
 		9DA1410C1844A24E0074CA35 /* Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frame.h; sourceTree = "<group>"; };
 		9DA1410D1844A24E0074CA35 /* Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Frame.m; sourceTree = "<group>"; };
 		9DBB44F31856A77C008D988A /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frame.png; path = PhotoViewer/frame.png; sourceTree = SOURCE_ROOT; };
@@ -139,6 +141,7 @@
 		9D21DAB218440AF5000C555F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9D6FB016193218480038682C /* floor-frames.jpg */,
 				9DA4A963184416C50062F709 /* Frame */,
 			);
 			name = Resources;
@@ -218,6 +221,7 @@
 				9DBB44F61856A77C008D988A /* frame.png in Resources */,
 				9DBB44F71856A77C008D988A /* leather-bump.jpg in Resources */,
 				9D21DA8F18440878000C555F /* MainMenu.xib in Resources */,
+				9D6FB017193218480038682C /* floor-frames.jpg in Resources */,
 				9DBB44F81856A77C008D988A /* leather.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
