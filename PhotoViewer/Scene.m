@@ -121,8 +121,8 @@
     image.size = NSSizeFromCGSize(CGSizeMake(2000, 20000));
     floor.firstMaterial.diffuse.contents = image;
     
-    floor.firstMaterial.diffuse.wrapS = SCNRepeat;
-    floor.firstMaterial.diffuse.wrapT = SCNRepeat;
+    floor.firstMaterial.diffuse.wrapS = SCNWrapModeRepeat;
+    floor.firstMaterial.diffuse.wrapT = SCNWrapModeRepeat;
 
     floorNode.geometry = floor;
     [self.rootNode addChildNode:floorNode];

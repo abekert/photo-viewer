@@ -172,7 +172,7 @@
 
 - (SCNVector4)cameraRotationForCameraPosition:(SCNVector3)cameraPosition andPicture:(SCNNode *)node
 {
-    double angle = atan(fabsf(cameraPosition.x - node.position.x) / fabsf(cameraPosition.z - node.position.z));
+    double angle = atan(fabs(cameraPosition.x - node.position.x) / fabs(cameraPosition.z - node.position.z));
     
     if (cameraPosition.x > node.position.x) {
         return SCNVector4Make(0, 1, 0, angle);

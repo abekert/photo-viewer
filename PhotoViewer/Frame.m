@@ -30,26 +30,14 @@
     frame = [self addChildNodeNamed:@"frame-layer" fromSceneNamed:@"frames"];
 }
 
-- (Orientation)orientation
-{
-    if (image) {
-        if (image.size.height > image.size.width) {
-            return OrientationVertical;
-        }
-    }
-    
-    return OrientationHorizontal;
-}
-
 - (void)setFrameImage
 {
     SCNNode *photoNode = [frame childNodeWithName:@"frame" recursively:YES];
 
-    if ([self orientation] == OrientationVertical) {
+    BOOL isVertical = image.size.height > image.size.width;
+    if (isVertical) {
         photoNode.scale = SCNVector3Make(1.2, 1, 0.7);
-    }
-    else
-    {
+    } else {
         photoNode.scale = SCNVector3Make(0.9, 1, 1);
     }
     
