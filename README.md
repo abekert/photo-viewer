@@ -1,7 +1,7 @@
 PhotoViewer
 ===========
 
-![Screenshot](https://github.com/abekert/photo-viewer/blob/master/showcase.gif "Photo Viewer")
+![](showcase.gif)
 
 
 View your pictures and videos in a virtual 3D gallery. Drag'n'drop your files and ready to go!
